@@ -1,0 +1,59 @@
+<!doctype html>
+<head>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        html {
+            background-color: #2d373b;
+        }
+        .button {
+            width: 250px;
+            position: absolute;
+            bottom: 0;
+        }
+        @media (max-width: 950px) {
+            .button {
+                width: 100%;
+                position: absolute;
+                bottom: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <img class="button" id="upbutton" src="media/b_up.png">
+    <img class="button" id="downbutton" src="media/b_down.png" style="opacity: 0%;">
+    <audio id="buzz" loop>
+        <source src="media/buzz.mp3" type="audio/mpeg">
+    </audio>
+</body>
+<script>
+    // var b_pressed = false
+
+    const upbutton = document.getElementById('upbutton')
+    const downbutton = document.getElementById('downbutton')
+
+    const buzz = document.getElementById('buzz')
+
+    function send_down(event) {
+        downbutton.style.opacity = '100%'
+        upbutton.style.opacity = '0%'
+        buzz.play()
+        event.preventDefault()
+    }
+    function send_up(event) {
+        upbutton.style.opacity = '100%'
+        downbutton.style.opacity = '0%'
+        buzz.pause()
+        event.preventDefault()
+    }
+
+    document.addEventListener('keydown', send_down)
+    document.addEventListener('keyup', send_up)
+
+    document.addEventListener('mousedown', send_down)
+    document.addEventListener('mouseup', send_up)
+</script>
